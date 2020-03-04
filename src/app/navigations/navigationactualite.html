@@ -1,0 +1,263 @@
+<header>
+    <!-- Header desktop -->
+    <div class="container-menu-desktop">
+        <!-- Header Mobile -->
+        <div class="wrap-header-mobile">
+            <!-- Logo moblie -->		
+            <div class="logo-mobile">
+                <a href="index.html"><img src="images/icons/logo-01.png" alt="IMG-LOGO"></a>
+            </div>
+
+            <!-- Button show menu -->
+            <div class="btn-show-menu-mobile hamburger hamburger--squeeze m-r--8">
+                <span class="hamburger-box">
+                    <span class="hamburger-inner"></span>
+                </span>
+            </div>
+        </div>
+
+        <!-- Menu Mobile -->
+        <div class="menu-mobile">
+            <ul class="topbar-mobile">
+                <li class="left-topbar">
+                    <span class="left-topbar-item flex-wr-s-c">
+                        <span>
+                            New York, NY
+                        </span>
+
+                        <img class="m-b-1 m-rl-8" src="images/icons/icon-night.png" alt="IMG">
+
+                        <span>
+                            HI 58° LO 56°
+                        </span>
+                    </span>
+                </li>
+
+                <li class="left-topbar">
+                    <a href="#" class="left-topbar-item">
+                        About
+                    </a>
+
+                    <a href="#" class="left-topbar-item">
+                        Contact
+                    </a>
+
+                    <a href="#" class="left-topbar-item">
+                        Sing up
+                    </a>
+
+                    <a href="#" class="left-topbar-item">
+                        Log in
+                    </a>
+                </li>
+
+                <li class="right-topbar">
+                    <a href="#">
+                        <span class="fab fa-facebook-f"></span>
+                    </a>
+
+                    <a href="#">
+                        <span class="fab fa-twitter"></span>
+                    </a>
+
+                    <a href="#">
+                        <span class="fab fa-pinterest-p"></span>
+                    </a>
+
+                    <a href="#">
+                        <span class="fab fa-vimeo-v"></span>
+                    </a>
+
+                    <a href="#">
+                        <span class="fab fa-youtube"></span>
+                    </a>
+                </li>
+            </ul>
+
+            <ul class="main-menu-m">
+                <li>
+                    <a href="index.html">Home</a>
+                    <ul class="sub-menu-m">
+                        <li><a href="index.html">Homepage v1</a></li>
+                        <li><a href="home-02.html">Homepage v2</a></li>
+                    </ul>
+
+                    <span class="arrow-main-menu-m">
+                        <i class="fa fa-angle-right" aria-hidden="true"></i>
+                    </span>
+                </li>
+
+                <li>
+                    <a href="category-01.html">News</a>
+                </li>
+
+                <li>
+                    <a href="category-02.html">Entertainment </a>
+                </li>
+
+                <li>
+                    <a href="category-01.html">Business</a>
+                </li>
+
+                <li>
+                    <a href="category-02.html">Travel</a>
+                </li>
+
+                <li>
+                    <a href="category-01.html">Life Style</a>
+                </li>
+
+                <li>
+                    <a href="category-02.html">Video</a>
+                </li>
+
+                <li>
+                    <a href="#">Features</a>
+                    <ul class="sub-menu-m">
+                        <li><a href="category-01.html">Category Page v1</a></li>
+                        <li><a href="category-02.html">Category Page v2</a></li>
+                        <li><a href="blog-grid.html">Blog Grid Sidebar</a></li>
+                        <li><a href="blog-list-01.html">Blog List Sidebar v1</a></li>
+                        <li><a href="blog-list-02.html">Blog List Sidebar v2</a></li>
+                        <li><a (click)=onViewActualite(z)>Blog Detail Sidebar</a></li>
+                        <li><a href="blog-detail-02.html">Blog Detail No Sidebar</a></li>
+                        <li><a href="about.html">About Us</a></li>
+                        <li><a href="contact.html">Contact Us</a></li>
+                    </ul>
+
+                    <span class="arrow-main-menu-m">
+                        <i class="fa fa-angle-right" aria-hidden="true"></i>
+                    </span>
+                </li>
+            </ul>
+        </div>
+        
+        <!--  -->
+        <div class="wrap-logo container">
+            <!-- Logo desktop -->		
+            <div class="logo">
+                <a href="index.html"><img src="images/icons/logo-01.png" alt="LOGO"></a>
+            </div>	
+
+            <!-- Banner -->
+            <div class="banner-header">
+                <a href="#"><img src="images/banner-01.jpg" alt="IMG"></a>
+            </div>
+        </div>	
+        
+        <!--  -->
+        <div class="wrap-main-nav">
+            <div class="main-nav show-main-nav">
+                <!-- Menu desktop -->
+                <nav class="menu-desktop">
+                    <a class="logo-stick" href="index.html">
+                        <img src="images/icons/logo-01.png" alt="LOGO">
+                    </a>
+
+                    <ul class="main-menu">
+                        <li class="main-menu-active">
+                            <a href="index.html">Page</a>
+                            <ul class="sub-menu">
+                                <li routerLinkActive="active"><a routerLink="empower">Empower</a></li>
+                                <li routerLinkActive="active"><a routerLink="empower">Actualite</a></li>
+                                <li routerLinkActive="active"><a routerLink="empower">Structure</a></li>
+                                <li routerLinkActive="active"><a routerLink="empower">...</a></li>
+                            </ul>
+                        </li>
+                            <li *ngFor="let groupe of actualites | groupBy:'categorie.groupe' | pairs; let i = index;" class="mega-menu-item">
+                                <a href="category-01.html">{{groupe[0]}}</a>
+
+                                <div class="sub-mega-menu">
+									<div class="nav flex-column nav-pills" role="tablist">
+										<a class="nav-link active" data-toggle="pill" href="#{{groupe[0]}}-155" role="tab" aria-expanded="true">Toutes</a>
+                                        
+                                        <a *ngFor="let actualite of actualites | groupBy:'categorie.name' | pairs; let a = index;" [ngStyle]="{'display':groupe[0] === actualite[1][0].categorie.groupe ? ' ' : 'none' }" class="nav-link" data-toggle="pill" href="#{{groupe[0]}}-{{a}}" role="tab" aria-expanded="false">{{actualite[0]}}</a>
+									</div>
+
+									<div class="tab-content">
+										<div class="tab-pane active" id="{{groupe[0]}}-155" role="tabpanel" aria-expanded="true">
+                                            
+											<div class="row" *ngFor="let actualite of actualites | groupBy:'categorie.name' | pairs; let y = index;" [ngStyle]="{'display':groupe[0] === actualite[1][0].categorie.groupe ? ' ' : 'none' }">
+                                                <div class="col-3" style="cursor: pointer;" *ngFor="let val of actualite[1].slice(-4); let z = index" (click)=onViewActualite(z)>
+													<!-- Item post -->	
+													<div>
+														<a (click)=onViewActualite(z) class="wrap-pic-w hov1 trans-03">
+															<img [src]="val.photo" [alt]="val.title">
+														</a>
+
+														<div class="p-t-10">
+															<h5 class="p-b-5">
+																<a (click)=onViewActualite(z) class="f1-s-5 cl3 hov-cl10 trans-03">
+																	{{val.title}}
+																</a>
+															</h5>
+
+															<span class="cl8">
+																<a href="#" class="f1-s-6 cl8 hov-cl10 trans-03">
+																	{{actualite[0]}}
+																</a>
+
+																<span class="f1-s-3 m-rl-3">
+																	-
+																</span>
+
+																<span class="f1-s-3">
+																	{{val.createAt}}
+																</span>
+															</span>
+														</div>
+													</div>
+												</div>
+											</div>
+										</div>
+
+										<div *ngFor="let actualite of actualites | groupBy:'categorie.name' | pairs; let y = index;" [ngStyle]="{'display':groupe[0] === actualite[1][0].categorie.groupe ? ' ' : 'none' }" class="tab-pane" id="{{groupe[0]}}-{{y}}" role="tabpanel" aria-expanded="false">
+											<div class="row">
+												<div class="col-3" *ngFor="let val of actualite[1].slice(-4); let w = index" [ngStyle]="{'display':val.categorie.name === actualite[0] && groupe[0] === val.categorie.groupe ? ' ' : 'none' }">
+													<!-- Item post -->	
+													<div>
+														<a (click)=onViewActualite(w) class="wrap-pic-w hov1 trans-03">
+															<img [src]="val.photo" [alt]="val.title">
+														</a>
+
+														<div class="p-t-10">
+															<h5 class="p-b-5">
+																<a (click)=onViewActualite(w) class="f1-s-5 cl3 hov-cl10 trans-03">
+																	{{val.title}}
+																</a>
+															</h5>
+
+															<span class="cl8">
+																<a href="#" class="f1-s-6 cl8 hov-cl10 trans-03">
+																	{{actualite[0]}}
+																</a>
+
+																<span class="f1-s-3 m-rl-3">
+																	-
+																</span>
+
+																<span class="f1-s-3">
+																	{{val.createAt}}
+																</span>
+															</span>
+														</div>
+													</div>
+												</div>
+											</div>
+										</div>
+									</div>
+								</div>
+                            </li>
+                        <li>
+                            <a href="#">Features</a>
+                            <ul class="sub-menu">
+                                <li><a href="category-01.html">Category Page v1</a></li>
+                                <li><a href="category-02.html">Category Page v2</a></li>
+                            </ul>
+                        </li>
+                    </ul>
+                </nav>
+            </div>
+        </div>	
+    </div>
+</header>

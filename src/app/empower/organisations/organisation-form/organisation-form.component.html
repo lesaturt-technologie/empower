@@ -1,0 +1,125 @@
+<div class="row">
+    <div class="col-sm-8 col-sm-offset-2">
+        <h2>Enregister un nouveau membre</h2>
+        <form [formGroup]="membreForm" (ngSubmit)="onSaveMembre()">
+            <div class="form-group">
+                <label for="name">Name</label>
+                <input type="text" class="form-control" id="name" formControlName="name"/>
+            </div>
+            <div class="form-group">
+                <label for="age">Age</label>
+                <input type="number" class="form-control" id="age" formControlName="age"/>
+            </div>
+            <div class="form-group">
+                <label for="nationalite">nationalité</label>
+                <input type="text" class="form-control" id="nationalite" formControlName="nationalite"/>
+            </div>
+            <div class="form-group">
+                <label for="localisation">localisation</label>
+                <input type="text" class="form-control" id="localisation" formControlName="localisation"/>
+            </div>
+            <div class="form-group">
+                <label for="phone">phone</label>
+                <input type="number" class="form-control" id="phone" formControlName="phone"/>
+            </div>
+            <div class="form-group">
+                <label for="phone">email</label>
+                <input type="email" class="form-control" id="email" formControlName="email"/>
+            </div>
+            <div class="form-group">
+                <label for="poste">poste</label>
+                <input type="text" class="form-control" id="poste" formControlName="poste"/>
+            </div>
+            <div class="form-group">
+                <label for="facebook">lien facebook</label>
+                <input type="url" class="form-control" id="facebook" formControlName="facebook"/>
+            </div>
+            <div class="form-group">
+                <label for="twitter">lien twitter</label>
+                <input type="url" class="form-control" id="twitter" formControlName="twitter"/>
+            </div>
+            <div class="form-group">
+                <label for="linkedin">lien linkedin</label>
+                <input type="url" class="form-control" id="linkedin" formControlName="linkedin"/>
+            </div>
+            <div class="form-group">
+                <label for="instangram">lien instangram</label>
+                <input type="url" class="form-control" id="instangram" formControlName="instangram"/>
+            </div>
+            <div class="form-group">
+                <label for="resume">resume</label>
+                <textarea  class="form-control" id="resume" formControlName="resume"></textarea>            </div>
+            <div class="form-group">
+                <h4>Ajouter une photo</h4>
+                <input type="file" class="form-control" id="profile" (change)="detectFiles($event,'fileUrl')" formControlName="profile" accept="image/*">
+                <p class="text-success" *ngIf="fileUploaded">Fichier chargé !</p>
+            </div>
+            <div class="row">
+                <hr>
+                <div class="form-group">
+                    <div class="col-md-offset-4 col-md-12">
+                        <button type="button" class="btn btn-primary" (click)="addExperienceButtonClick()"> Ajouter une experience</button>
+                    </div>
+                </div>
+                <div formArrayName="experiences" *ngFor="let exp of this.membreForm.get('experiences').controls; let i = index">
+                    <div [formGroupName]="i">
+                        <div class="form-group">
+                            <label for="poste">description title</label>
+                            <input type="text" class="form-control" id="poste" formControlName="poste"/>
+                        </div>
+                        <div class="form-group">
+                            <label for="entreprise">entreprise</label>
+                            <textarea class="form-control" id="entreprise" formControlName="entreprise"></textarea>
+                        </div>
+                        <div class="form-group">
+                            <label for="date_debut">date de debut</label>
+                            <input type="date" class="form-control" id="date_debut" formControlName="date_debut"/>
+                        </div>
+                        <div class="form-group">
+                            <label for="date_fin">date de fin</label>
+                            <input type="date" name="date_fin" id="date_fin" class="form-control" formControlName="date_fin"/>
+                        </div>
+                        <div class="form-group">
+                            <label for="resume"> resume </label>
+                            <textarea class="form-control" id="resume" formControlName="resume"></textarea>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <div class="row">
+                <hr>
+                <div class="form-group">
+                    <div class="col-md-offset-4 col-md-12">
+                        <button type="button" class="btn btn-primary" (click)="addEducationButtonClick()"> Ajouter un parcours académique</button>
+                    </div>
+                </div>
+                <div formArrayName="educations" *ngFor="let edu of this.membreForm.get('educations').controls; let y = index">
+                    <div [formGroupName]="y">
+                        <div class="form-group">
+                            <label for="diplome">description title</label>
+                            <input type="text" class="form-control" id="diplome" formControlName="diplome"/>
+                        </div>
+                        <div class="form-group">
+                            <label for="etablissement">etablissement</label>
+                            <textarea class="form-control" id="etablissement" formControlName="etablissement"></textarea>
+                        </div>
+                        <div class="form-group">
+                            <label for="date_debut">date de debut</label>
+                            <input type="date" class="form-control" id="date_debut" formControlName="date_debut"/>
+                        </div>
+                        <div class="form-group">
+                            <label for="date_fin">date de fin</label>
+                            <input type="date" name="date_fin" id="date_fin" class="form-control" formControlName="date_fin"/>
+                        </div>
+                        <div class="form-group">
+                            <label for="resume"> resume </label>
+                            <textarea class="form-control" id="resume" formControlName="resume"></textarea>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            
+            <button class="btn btn-success" [disabled]="membreForm.invalid" type="submit" > Enregistrer</button>
+        </form>
+    </div>
+</div>

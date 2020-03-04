@@ -1,0 +1,107 @@
+<div *ngFor="let app of apps$ | async">
+    <h4>{{ app.id }}</h4>
+    <ul>
+      <li *ngFor="let item of app.group">{{ item | json }}</li>
+    </ul>
+  </div>
+<section class="bg0">
+    <div class="container">
+        <div class="row m-rl--1">
+            <div class="col-sm-6 col-lg-4 p-rl-1 p-b-2" *ngFor="let  actualite of actualites; let i = index">
+                <div class="bg-img1 size-a-12 how1 pos-relative" [style.backgroundImage]="'url('+actualite.photo+')'">
+                    <a  (click)="onViewActualite(i)" class="dis-block how1-child1 trans-03"></a>
+
+                    <div class="flex-col-e-s s-full p-rl-25 p-tb-11">
+                        <a (click)="onViewActualite(i)" class="dis-block how1-child2 f1-s-2 cl0 bo-all-1 bocl0 hov-btn1 trans-03 p-rl-5 p-t-2">
+                            {{actualite.categorie.name}}  
+                        </a>
+
+                        <h3 class="how1-child2 m-t-10">
+                            <button (click)="onViewActualite(i)" class="f1-m-1 cl0 hov-cl10 trans-03">
+                                {{actualite.title}}                            
+                            </button>
+                        </h3>
+                        <p class="list-group-item-text pull-rigth">{{ actualite.author }}</p>
+                        <a (click)="openScrollableContent(longContent,i)" style="cursor: pointer;" class="dis-block how1-child2 f1-s-2 cl0 bo-all-1 bocl0 hov-btn1 trans-03 p-rl-5 p-t-2">
+                            publier 
+                        </a>
+                        <a (click)="onDeleteActualite(actualite)" style="cursor: pointer;" class="dis-block how1-child2 f1-s-2 cl0 bo-all-1 bocl0 hov-btn2 trans-03 p-rl-5 p-t-2">
+                            supprimer
+                        </a>
+                    </div>
+                </div>
+                
+            </div>
+        </div>
+    </div>
+</section>
+
+<div class="row">
+    <div class="col-xs-12">
+         <button class="btn btn-primary" style="cursor: pointer;" (click)="onNewActualite()">Nouvelle actualité</button>
+    </div>
+</div>
+
+  <ng-template #content let-modal>
+    <div class="modal-header">
+      <h4 class="modal-title">Rendez l'actualité Public</h4>
+      <button type="button" class="close" aria-label="Close" (click)="modal.dismiss('Cross click')">
+        <span aria-hidden="true">&times;</span>
+      </button>
+    </div>
+    <div class="modal-body">
+      <p>{{SingleActuality.title}}</p>
+    </div>
+    <div class="modal-footer">
+      <button type="button" class="btn btn-light" (click)="modal.close('Close click')">Close</button>
+    </div>
+  </ng-template>
+  
+  <ng-template #longContent let-modal>
+    <div class="modal-header">
+      <h4 class="modal-title">Modal title</h4>
+      <button type="button" class="close" aria-label="Close" (click)="modal.dismiss('Cross click')">
+        <span aria-hidden="true">&times;</span>
+      </button>
+    </div>
+    <div class="modal-body">
+        <div class="col-md-12">
+            <div class="card flex-md-row mb-4 box-shadow h-md-250">
+                <img class="card-img-top flex-auto" alt="Thumbnail [200x250]" style="width: 100px; height: 150px;" [src]="SingleActuality.photo" data-holder-rendered="true">  
+              <div class="card-body d-flex flex-column align-items-start">
+                <strong class="d-inline-block mb-2 text-primary">{{SingleActuality.categorie}}</strong>
+                <h3 class="mb-0">
+                  <a class="text-dark" href="#">{{SingleActuality.title}}</a>
+                </h3>
+                <div class="mb-1 text-muted">{{SingleActuality.createdAt}}</div>
+                <p class="card-text mb-auto">{{SingleActuality.introduction}}</p>
+                <a href="#">{{SingleActuality.author}}</a>
+              </div></div>
+          </div>
+    </div>
+    
+      <div class="modal-footer">
+        <form *ngIf="SingleActuality.status !== 'publier'" #f="ngForm" (ngSubmit)="PublierActualite(SingleActuality, f)" novalidate>
+          <div class="row">
+            <div class="col-sm-6">
+              <div class="form-group">
+                <label for="position">Type de publication</label>
+                <select id="position" [(ngModel)]="position" name="position" required>
+                    <option *ngFor="let pos of ActualitePostsArray" id="index" name="index" [value]="pos.index">
+                        {{pos.name }}
+                    </option>
+                </select>
+            </div>
+            </div>
+            <div class="col-sm-6">
+              <button type="submit" class="btn btn-warning">Publier</button> 
+              <button type="button" class="btn btn-light" (click)="modal.close('Close click')">Fermer</button>
+            </div>
+          </div>
+        </form>
+        <div *ngIf="SingleActuality.status === 'publier'">
+          <button type="button" class="btn btn-danger" (click)="DepublierActualite(SingleActuality)">Deplublier</button>
+          <button type="button" class="btn btn-light" (click)="modal.close('Close click')">Fermer</button>
+        </div>
+      </div>
+  </ng-template>

@@ -1,0 +1,42 @@
+<nav class="navbar navbar-expand-lg">
+    <a class="navbar-brand" href="index.html">
+        <img src="" alt="Logo">
+    </a>
+    <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
+        <span class="toggler-icon"></span>
+        <span class="toggler-icon"></span>
+        <span class="toggler-icon"></span>
+    </button>
+
+    <div class="collapse navbar-collapse sub-menu-bar" id="navbarSupportedContent">
+        <ul id="nav" class="navbar-nav ml-auto">
+            <li class="nav-item" routerLinkActive="active">
+                <a class="page-scroll" routerLink="/actualites/feat/2">Actualités</a>
+            </li>
+            <li class="nav-item" routerLinkActive="active">
+                <a class="page-scroll" routerLink="/cultures">Cultures</a>
+            </li>
+            <li class="nav-item active" routerLinkActive="active">
+                <a class="page-scroll" routerLink="empower">Empower</a>
+            </li>
+            <li class="nav-item" routerLinkActive="active">
+                <a class="page-scroll" routerLink="/preventions">Preventions</a>
+            </li>
+            <li class="nav-item" routerLinkActive="active">
+                <a class="page-scroll" href="#blog">Structures</a>
+            </li>
+            <li class="nav-item" routerLinkActive="active">
+                <a class="page-scroll" routerLink="/usagers">Usagers</a>
+            </li>
+        </ul>
+    </div> <!-- navbar collapse -->
+    
+    <div class="navbar-btn d-none d-sm-inline-block" routerLinkActive="active">
+            <a class="text-muted" href="#" aria-label="Search">
+              <svg xmlns="http://www.w3.org/2000/svg" width="20" height="20" fill="none" stroke="currentColor" stroke-linecap="round" stroke-linejoin="round" stroke-width="2" class="mx-3" role="img" viewBox="0 0 24 24" focusable="false"><title>Search</title><circle cx="10.5" cy="10.5" r="7.5"></circle><path d="M21 21l-5.2-5.2"></path></svg>
+            </a>
+            <a class="btn btn-sm btn-outline-secondary" routerLink="auth/signin" *ngIf="!isAuth">Se Connecter</a>
+            
+            <a class="btn btn-sm btn-outline-secondary" (click)="onSignOut()" style="cursor: pointer;" *ngIf="isAuth">Déconnexion</a>
+    </div>
+</nav> <!-- navbar -->

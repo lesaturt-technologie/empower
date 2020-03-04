@@ -1,0 +1,93 @@
+<form [formGroup]="ObjectifForm" (ngSubmit)="onSaveObjectif()">
+<!--====== ABOUT PART START ======-->
+<section class="about-area pt-70">
+    <div class="about-shape-2">
+        <img src="assets/images/about-shape-2.svg" alt="shape">
+    </div>
+    <div class="container">
+            <div class="row">
+                <div class="col-lg-6 order-lg-last">
+                    <div class="about-content mt-50 wow fadeInLeftBig" data-wow-duration="1s" data-wow-delay="0.5s">
+                        <div class="section-title">
+                            <div class="line"></div>
+                            <h3 *ngIf="!edit" class="title">{{objectif.libelle1}} <span> {{objectif.libelle2}}</span></h3>
+                            <h3 *ngIf="edit" class="title"><input type="text" formControlName="libelle1" placeholder="{{objectif.libelle1}}"/> <span> <input type="text" formControlName="libelle2" placeholder="{{objectif.libelle2}}"/></span></h3>
+                        </div> <!-- section title -->
+                        <p *ngIf="!edit" class="text">{{objectif.resume}}</p>
+                        <textarea *ngIf="edit" class="form-control" formControlName="resume" placeholder="{{objectif.resume}}"></textarea>
+                        <div class="row">
+                            <div class="col-sm-6">
+                                <input *ngIf="edit" class="main-btn" type="file" value="changer le cover" (change)="detectFiles($event, 'cover')" formControlName="cover" accept="image/*"/>
+                            </div>
+                            <div class="col-sm-6">
+                                <button *ngIf="edit" class="main-btn" [disabled]="ObjectifForm.invalid" type="submit">Sauvegarder</button>
+                            </div>
+                        </div>
+                    </div> <!-- about content -->
+                </div>
+                <div class="col-lg-6 order-lg-first">
+                    <div class="about-image text-center mt-50 wow fadeInRightBig" data-wow-duration="1s" data-wow-delay="0.5s">
+                    <img *ngIf="!edit" [src]="objectif.profile" alt="">
+                    <div *ngIf="edit" class="hovereffect">
+                        <img [src]="objectif.profile" alt="">
+                        <div class="overlay">
+                            <h2>Changer le photo</h2>
+                            <a class="info">
+                                <p class="btn btn-default btn-file">
+                                Changer <input type="file" formControlName="profile" (change)="detectFiles($event, 'fileUrl')" accept="image/*">
+                                </p>
+                            </a>
+                        </div>
+                    </div>
+                    </div> <!-- about image -->
+                </div>
+            </div> <!-- row -->
+    </div> <!-- container -->
+    <div id="resume" *ngIf="!edit">
+        <div class="container">
+            <div class="row">
+                <div *ngFor="let subobjectif of objectif.sousobjectifs | groupBy:'categorie' | pairs;" class="col-lg-6 col-md-6 col-sm-6">
+                  <div class="education wow fadeInRight animated" data-wow-delay="0.3s" style="visibility: visible;-webkit-animation-delay: 0.3s; -moz-animation-delay: 0.3s; animation-delay: 0.3s;">
+                    <ul class="timeline">
+                      <li>
+                        <i class="icon-graduation"></i>
+                        <h2 class="timelin-title">{{subobjectif[0]}}</h2>
+                      </li>
+                        <li *ngFor="let item of subobjectif[1]">
+                          <div class="content-text">
+                            <h3 class="line-title">{{item.title}}</h3>
+                            <span>{{item.subtitle}}</span>
+                            <p class="line-text">{{item.resume}}</p>
+                          </div>
+                        </li>
+                    </ul>
+                  </div>
+                </div>
+            </div>
+        </div>
+      </div>
+    <div *ngIf="edit" class="container">
+        <button type="button" class="btn btn-primary" (click)="addSubObjectif()"> Ajouter un sous objectif</button>
+          <div class="row" formArrayName="sousobjectifs">
+            <div class="col-lg-6 col-md-6 col-sm-6" *ngFor="let subobjectif of this.ObjectifForm.get('sousobjectifs').controls; let i = index" [formGroupName]="i">
+              <div class="education wow fadeInRight animated" data-wow-delay="0.3s" style="visibility: visible;-webkit-animation-delay: 0.3s; -moz-animation-delay: 0.3s; animation-delay: 0.3s;">
+                <ul class="timeline">
+                  <li>
+                    <i class="icon-graduation"></i>
+                    <h2 class="timelin-title"><input style="width: -webkit-fill-available;" placeholder="categorie" type="text"  id="categorie" formControlName="categorie"/></h2>
+                  </li>
+                  <li>
+                    <div class="content-text">
+                      <h3 class="line-title"> <input style="width: -webkit-fill-available;" type="text" placeholder="title" id="title" formControlName="title"/></h3>
+                      <span> <input style="width: -webkit-fill-available;" type="text" placeholder="subtitle" id="subtitle" formControlName="subtitle"/></span>
+                      <p class="line-text"> <input style="width: -webkit-fill-available;" placeholder="resume" type="text"  id="resume" formControlName="resume"/></p>
+                    </div>
+                  </li>
+                </ul>
+              </div>
+            </div>
+
+          </div>
+    </div>
+  </section>
+</form>

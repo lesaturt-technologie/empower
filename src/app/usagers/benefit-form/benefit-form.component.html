@@ -1,0 +1,45 @@
+<section class="hero-section">
+    <div class="container">
+        <div class="row">
+            <div class="col-sm-12 col-sm-offset-2">
+                <form [formGroup]="benefitForm" (ngSubmit)="onSaveBenefit()">
+                    <div class="form-group">
+                        <label for="title">Titre</label>
+                        <input type="text" class="form-control" id="title" formControlName="title"/>
+                    </div>
+                    <div class="form-group">
+                        <label for="introduction">Introduction</label>
+                        <textarea class="form-control" id="introduction" formControlName="introduction"></textarea>
+                    </div>
+                    <div class="row">   
+                        <hr>
+                        <div class="form-group">
+                            <div class="col-md-offset-4 col-md-12">
+                                <button type="button" class="btn btn-primary" (click)="addCitation()"> Ajouter une citation</button>
+                            </div>
+                        </div>
+                        <div formArrayName="descriptions">
+                            <div *ngFor="let group of this.benefitForm.get('descriptions').controls; let i = index" [formGroupName]="i" style="float: left;">
+                                <div>
+                                    <div class="form-group">
+                                        <label for="icon">code Icône</label>
+                                        <input type="text" class="form-control" id="icon" formControlName="icon"/>
+                                    </div>
+                                    <div class="form-group">
+                                        <label for="titre">titre de l'auteur</label>
+                                        <input type="text" class="form-control" id="titre" formControlName="titre"/>
+                                    </div>
+                                    <div class="form-group">
+                                        <label for="resume">Resume</label>
+                                        <textarea class="form-control" id="resume" formControlName="resume"></textarea>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>            
+                    <button class="btn btn-success" [disabled]="benefitForm.invalid" type="submit" > Enregistrer</button>
+                </form>
+            </div>
+        </div><!--//row-->
+    </div><!--//container-->
+</section>

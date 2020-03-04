@@ -1,0 +1,19 @@
+<section id="benefits-section" class="benefits-section theme-bg-light-gradient py-5">
+    <div class="container py-5">
+        <h2 class="section-heading text-center mb-3">{{benetinfos.titre}}</h2>
+        <div class="section-intro single-col-max mx-auto text-center mb-5">{{benetinfos.introduction}}</div>
+        <div class="row text-center" *ngIf="benetinfos.descriptions">
+            <div *ngFor="let desc of benetinfos.descriptions; let i = index" class="item col-12 col-md-6 col-lg-4">
+                <div class="item-inner p-3 p-lg-4">
+                    <div class="item-header mb-3">
+                        <div class="item-icon"><i style="height: 1em;" class="svg-inline--fa {{desc.icon}} fa-w-20"></i></div>
+                        <h3 class="item-heading">{{desc.titre}}</h3>
+                    </div><!--//item-heading-->
+                    <div class="item-desc">
+                        {{desc.resume}} 
+                    </div><!--//item-desc-->
+                </div><!--//item-inner-->
+            </div><!--//item-->
+        </div><!--//row-->
+    </div><!--//container-->
+</section>

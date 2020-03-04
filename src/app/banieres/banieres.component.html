@@ -1,0 +1,7 @@
+<ngb-carousel *ngIf="images" [showNavigationArrows]="showNavigationArrows" [showNavigationIndicators]="showNavigationIndicators">
+    <ng-template ngbSlide *ngFor="let image of images">
+        <div class="header-hero-image text-center wow fadeIn" data-wow-duration="1.3s" data-wow-delay="1.4s">
+            <img [src]="image" alt="Random slide">
+        </div> <!-- header hero image -->
+    </ng-template>
+</ngb-carousel>

@@ -1,0 +1,22 @@
+ 
+.columns img {
+    display: inline-block;
+    padding: 25px 0 10px;
+}
+
+.columns h2 {
+    text-align: center;
+    font-size: 2.25rem;
+    line-height: 2.2rem;
+    font-family: "BauhausStd-Demi";
+    color: #5f6062;
+    margin-bottom: 19px;
+}
+.columns h2 span {
+    font-size: medium;
+    display: block;
+    font-family: "Aller";
+    margin-top: 15px;
+    line-height: 1rem;
+    font-weight: 900;
+}

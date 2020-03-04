@@ -1,0 +1,60 @@
+<form [formGroup]="LayoutForm" (ngSubmit)="onSaveLayout()">
+    <!--====== ABOUT PART START ======-->
+    <section class="about-area">
+        <div class="container">
+            <div class="row">
+                <div class="col-lg-6 order-lg-last">
+                    <div class="about-content mt-50 wow fadeInLeftBig" data-wow-duration="1s" data-wow-delay="0.5s">
+                        <!-- <p class="text">{{layout.resume}}</p> -->
+                        <textarea class="form-control" formControlName="bannerResume" placeholder=""></textarea>
+                    </div> <!-- about content -->
+                </div>
+                <div class="col-lg-6 order-lg-first">
+                    <div class="about-image text-center mt-50 wow fadeInRightBig" data-wow-duration="1s" data-wow-delay="0.5s">
+                    <!--<img [src]="layout.bannerFile" alt="bannerFile">-->
+                    <div class="hovereffect" style="min-height: 150px;">
+                        <img [src]="layout.bannerFile" alt="bannerFile" style="width: 200px; height: auto;">
+                        <div class="overlay">
+                            <h2>Changer le photo</h2>
+                            <a class="info">
+                                <p class="btn btn-default btn-file">
+                                Changer <input type="file" formControlName="bannerFile" (change)="detectFiles($event, 'fileUrl')" accept="image/*">
+                                </p>
+                            </a>
+                        </div>
+                    </div>
+                    </div> <!-- about image -->
+                </div>
+            </div> <!-- row -->
+            <div class="row">
+                <div class="col-lg-6 order-lg-last">
+                    <div class="about-content mt-50 wow fadeInLeftBig" data-wow-duration="1s" data-wow-delay="0.5s">
+                        <!-- <p class="text">{{layout.resume}}</p> -->
+                        <textarea class="form-control" formControlName="navBarResume" placeholder="navBarResume"></textarea>
+                    </div> <!-- about content -->
+                </div>
+                <div class="col-lg-6 order-lg-first">
+                    <div class="about-image text-center mt-50 wow fadeInRightBig" data-wow-duration="1s" data-wow-delay="0.5s">
+                   <!-- <img [src]="layout.profile" alt=""> -->
+                    <div class="hovereffect" style="min-height: 150px;">
+                        <img [src]="layout.navBarFile" alt="navBarFile" style="width: 200px; height: auto;">
+                        <div class="overlay">
+                            <h2>Changer le photo</h2>
+                            <a class="info">
+                                <p class="btn btn-default btn-file">
+                                Changer <input type="file" formControlName="navBarFile" (change)="detectFiles($event, 'cover')" accept="image/*">
+                                </p>
+                            </a>
+                        </div>
+                    </div>
+                    </div> <!-- about image -->
+                </div>
+            </div> <!-- row -->
+            <div class="row">
+                <input type="url" class="form-control" formControlName="videoFile" /><br>
+                <textarea class="form-control" formControlName="videoResume"></textarea>
+            </div> <!-- row -->
+    </div> <!-- container -->
+    <button type="submit" class="btn btn-primary" [disabled]="LayoutForm.invalid">Sauvegarder</button>
+    </section>
+</form>

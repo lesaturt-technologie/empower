@@ -1,0 +1,62 @@
+
+<div class="row">
+    <div class="col-sm-8 col-sm-offset-2">
+        <h2>Enregister un nouveau livre</h2>
+        <form [formGroup]="actualiteForm" (ngSubmit)="onSaveActualite()">
+            <div class="form-group">
+                <label for="title">Titre</label>
+                <input type="text" class="form-control" id="title" formControlName="title"/>
+            </div>
+            <div class="form-group">
+                <label for="author">Auteur</label>
+                <input type="text" class="form-control" id="author" formControlName="author"/>
+            </div>
+            <div class="form-group">
+                <label for="introduction">Introduction</label>
+                <textarea class="form-control" id="introduction" formControlName="introduction"></textarea>
+            </div>
+            <div class="form-group">
+                <label for="categorie">Categorie</label>
+                <select id="categorie" formControlName="categorie">
+                    <option *ngFor="let categ of categories let i = index" [value]="i">
+                        {{ categ.name }}
+                    </option>
+                </select>
+            </div>
+            <div class="form-group">
+                <h4>Ajouter une photo</h4>
+                <input type="file" class="form-control" (change)="detectFiles($event, 'fileUrl')" accept="image/*">
+                <p class="text-success" *ngIf="fileUploaded">Fichier chargé !</p>
+            </div>
+            <div class="row">   
+                <hr>
+                <div class="form-group">
+                    <div class="col-md-offset-4 col-md-12">
+                        <button type="button" class="btn btn-primary" (click)="addDescription()"> Ajouter une description</button>
+                    </div>
+                </div>
+                <div formArrayName="descriptions">
+                    <div *ngFor="let group of this.actualiteForm.get('descriptions').controls; let i = index" [formGroupName]="i">
+                        <div >
+                            <div class="form-group">
+                                <label for="titleDescription">description title</label>
+                                <input type="text" class="form-control" id="titleDescription" formControlName="titleDescription"/>
+                            </div>
+                            <div class="form-group">
+                                <label for="libelleDescription">libelle</label>
+                                <textarea class="form-control" id="libelleDescription" formControlName="libelleDescription"></textarea>
+                            </div>
+                            
+                            <div class="form-group">
+                                <h4>Ajouter une photo</h4>
+                                <input type="file" class="form-control" (change)="detectFilesDescription($event, i)" accept="image/*">
+                                <p class="text-success" *ngIf="fileUploadedDescription">Fichier chargé !</p>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>            
+            <button class="btn btn-success" [disabled]="actualiteForm.invalid" type="submit" > Enregistrer</button>
+        </form>
+    </div>
+</div>

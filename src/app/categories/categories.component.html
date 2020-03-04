@@ -1,0 +1,15 @@
+<div class="row">
+        <div class="list-group col-sm-12">
+            <button class="list-group-item" *ngFor="let  categorie of categories; let i = index"
+            (click)="onViewCategorie(i)">
+            <h3 class="list-group-item-heading">
+                {{categorie.name}}
+                <button class="btn btn-danger pull-right" (click)="onDeletecategorie(categorie)">
+                    <span class="glyphicon glyphicon-minus">supprimer</span>
+                </button>
+            </h3>
+            <p class="list-group-item-text">{{ categorie.libelle }}</p> 
+            </button> 
+        </div>
+         <button class="btn btn-primary" style="cursor: pointer;" (click)="onNewCategorie()">Nouvelle Catégorie</button>
+</div>
