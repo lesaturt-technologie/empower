@@ -120,6 +120,10 @@
           }
         }
       }
-    }},
-  "defaultProject": "empower"
+    }
+  },
+  "defaultProject": "empower",
+  "cli": {
+    "analytics": "c4631583-2b8f-4c1d-94ad-e6b768a61664"
+  }
 }
