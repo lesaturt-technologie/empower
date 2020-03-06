@@ -66,6 +66,8 @@ import { BenefitFormComponent } from './usagers/benefit-form/benefit-form.compon
 import { BenefitComponent } from './usagers/benefit/benefit.component';
 import { CommissionComponent } from './usagers/commission/commission.component';
 import { CommissionFormComponent } from './usagers/commission-form/commission-form.component';
+import { CollectifComponent } from './usagers/collectif/collectif.component';
+import { CollectifFormComponent } from './usagers/collectif-form/collectif-form.component';
 
 const appRoutes: Routes = [
   { path: "", component: HomeComponent},
@@ -150,6 +152,8 @@ const appRoutes: Routes = [
     BenefitComponent,
     CommissionComponent,
     CommissionFormComponent,
+    CollectifComponent,
+    CollectifFormComponent,
   ],
   imports: [
     BrowserModule,

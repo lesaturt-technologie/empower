@@ -1,0 +1,60 @@
+<section class="hero-section">
+    <div class="container">
+        <div class="row">
+            <div class="col-sm-12 col-sm-offset-2">
+                <div [formGroup]="collectifForm" (ngSubmit)="onSavecollectif()">
+                    <div class="form-group">
+                        <label for="titre">Titre</label>
+                        <input type="text" class="form-control" id="titre" formControlName="titre" [value]="collectifinfos ? collectifinfos.titre:''"/>
+                    </div>
+                    <div class="form-group">
+                        <label for="introduction">Introduction</label>
+                        <textarea class="form-control" id="introduction" formControlName="introduction" [value]="collectifinfos ? collectifinfos.introduction:''"></textarea>
+                    </div>
+                    <div class="row">
+                        <hr>
+                        <div class="form-group">
+                            <div class="col-md-offset-4 col-md-12">
+                                <button type="button" class="btn btn-primary" (click)="addParagraphe()"> Ajouter un paragraphe</button>
+                            </div>
+                        </div>
+                        <div formArrayName="paragraphes">
+                            <div class="card-body row table-responsive" *ngIf="collectifinfos">
+                                <table class="table table-sm">
+                                    <tr *ngFor="let paragraphe of collectifinfos.paragraphe; let i = index;">
+                                        <th class="col-sm-2">{{i}}</th>
+                                        <th class="col-sm-5" id="titretabmod"><textarea (change)="editvaluetitreparagraphe($event, i)" [value]="paragraphe.titre"></textarea></th>
+                                        <th class="col-sm-5" id="soustitretabmod"><textarea (change)="editvaluesoustitreparagraphe($event, i)" [value]="paragraphe.soustitre"></textarea></th>
+                                        <th class="col-sm-5" id="resumetabmod"><textarea (change)="editvalueresumeparagraphe($event, i)" [value]="paragraphe.resume"></textarea></th>
+                                        <th><a class="btn btn-danger" (click) = "deleteParagraphe(i)" >Supprimer</a></th>
+                                    </tr>
+                                </table>
+                            </div>
+                            <div *ngFor="let paragraphe of this.collectifForm.get('paragraphes').controls; let i = index" [formGroupName]="i" style="float: left;">
+                                <div>
+                                    <div class="form-group">
+                                        <label for="titre">titre</label>
+                                        <input type="text" class="form-control" id="titre" formControlName="titre" />
+                                    </div>
+                                    <div class="form-group">
+                                        <label for="soustitre">sous titre</label>
+                                        <input type="text" class="form-control" id="soustitre" formControlName="soustitre" />
+                                    </div>
+                                    <div class="form-group">
+                                        <label for="resume">resumé</label>
+                                        <textarea class="form-control" id="resume" formControlName="resume"></textarea>
+                                    </div>
+                                    <div class="form-group">
+                                        <label for="resume">fichier image</label>
+                                        <input type="file" (change)="detectFilesmodalites($event, 'outil')" class="form-control" />
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>           
+                    <button class="btn btn-success" type="submit" [disabled]="collectifForm.invalid" (click)="onSavecollectif()">Sauvegarder</button>
+                </div>
+            </div><!--//row-->
+        </div><!--//container-->
+    </div>
+</section>

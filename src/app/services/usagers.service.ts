@@ -4,6 +4,7 @@ import { Subject } from 'rxjs';
 import { Headline } from '../models/headline';
 import { Benefit } from '../models/benefit';
 import { Commission } from '../models/commission';
+import { Collectif } from '../models/collectif';
 
 @Injectable({
   providedIn: 'root'
@@ -23,6 +24,20 @@ export class UsagersService {
     return new Promise(
       (resolve, reject) => {
         firebase.database().ref('/usagersCommission').once('value').then(
+          (data) => {
+            resolve(data.val());
+          }, (error) => {
+            reject(error);
+          }
+        );
+      }
+    );
+  }
+
+  getUsagerscollectif(){
+    return new Promise(
+      (resolve, reject) => {
+        firebase.database().ref('/usagersCollectif').once('value').then(
           (data) => {
             resolve(data.val());
           }, (error) => {
@@ -59,6 +74,15 @@ export class UsagersService {
         );
       }
     );
+  }
+  
+  updateUsagersCollectif(collectif: Collectif){
+    return new Promise(
+      (resolve, reject) => {
+        firebase.database().ref().child('/usagersCollectif')
+        .update(collectif)
+      }
+    )
   }
 
   updateUsagersCommission(commission: Commission){

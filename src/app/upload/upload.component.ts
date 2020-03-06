@@ -16,6 +16,7 @@ export class UploadComponent  {
     fileUrlDescription: Array<String> = [];
     fileUrlPerspective: Array<String> = [];
     fileUrlOutil: Array<String> = [];
+    fichierOutil: Array<String> = [];
     currentUpload: Upload;
   
     constructor(private upSvc: UploadService) { }
@@ -51,9 +52,11 @@ export class UploadComponent  {
               this.fileUrlPerspective.push(url);
               break;
             case "outil":
-              alert(url)
               this.fileUrlOutil.push(url);
               break;
+              case "fichier":
+                this.fichierOutil.push(url);
+                break;
             default:
               this.fileUrlDescription.push(url);
               break;

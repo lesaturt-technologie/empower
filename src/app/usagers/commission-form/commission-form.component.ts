@@ -1,4 +1,4 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, OnInit, Input } from '@angular/core';
 import { Validators, FormBuilder, FormGroup, FormArray } from '@angular/forms';
 import { UsagersService } from 'src/app/services/usagers.service';
 import { UploadComponent } from 'src/app/upload/upload.component';
@@ -11,12 +11,13 @@ import { Commission } from 'src/app/models/commission';
   styleUrls: ['../usagers.component.css']
 })
 export class CommissionFormComponent implements OnInit {
-
+  commissioninfos;
   commissionForm : FormGroup;
   fileIsUploading = false;
   fileUrl: string;
   fileUrlPerspective: String[];
   fileUrlOutil: String[];
+  fichierOutil: String[];
   fileUploaded = false;
   fileUploadeddescription = false;
   myDate = new Date();
@@ -27,14 +28,18 @@ export class CommissionFormComponent implements OnInit {
               private router: Router) { }
 
   ngOnInit() {
+    this.usagersService.getUsagersCommission().then(
+      (commission: Commission) => {
+        this.commissioninfos = commission;
+      })
     this.initForm()
   }
   
   initForm(){
     this.commissionForm = this.formBuilder.group({
-      profile: ['', Validators.required],
+      profile: [''],
       titre: ['', Validators.required],
-      introduction : ['', Validators.required],
+      introduction: ['', Validators.required],
       titreoutil: ['', Validators.required],
       resumeoutil: ['', Validators.required],
       titremodalite: ['', Validators.required],
@@ -69,27 +74,52 @@ export class CommissionFormComponent implements OnInit {
     return <FormArray>this.commissionForm.get('outils');
   }
 
-  addOutils(){
-    this.addoutilsArray.push(this.addoutilsFormGroup());
+  editvaluetitreOutil(e, i){
+    this.commissioninfos.outils[i].titre = e.srcElement.value
   }
 
+  editvalueresumeOutil(e, i){
+    this.commissioninfos.outils[i].resume = e.srcElement.value
+  }
+
+  editvaluegroupeOutil(e, i){
+    this.commissioninfos.outils[i].groupe = e.srcElement.value
+  }
+
+  deleteOutil(i, item){
+    this.commissioninfos.outils.splice(i,1)
+  }
 
   addoutilsFormGroup(): FormGroup {
     return this.formBuilder.group({
       profile: [''],
-      titre: ['', Validators.required],
-      resume: ['', Validators.required],
-      groupe: ['', Validators.required],
+      fichier: [''],
+      titre: [''],
+      resume: [''],
+      groupe: [''],
 
     });
   }
 
+ 
+
+  editvaluetitrePerspective(e, i){
+    this.commissioninfos.perspectives[i].titre = e.srcElement.value
+  }
+
+  editvalueresumePerspective(e, i){
+    this.commissioninfos.perspectives[i].resume = e.srcElement.value
+  }
+
+  deletePerspective(i){
+    this.commissioninfos.perspectives.splice(i,1)
+  }
 
   addperspectivesFormGroup(): FormGroup {
     return this.formBuilder.group({
-      profile: ['', Validators.required],
-      titre: ['', Validators.required],
-      resume: ['', Validators.required],
+      profile: [''],
+      titre: [''],
+      resume: [''],
     });
   }
 
@@ -101,10 +131,21 @@ export class CommissionFormComponent implements OnInit {
     this.addobjectifsArray.push(this.addobjectifsFormGroup());
   }
 
+  editvaluetitreObjectif(e, i){
+    this.commissioninfos.objectif[i].titre = e.srcElement.value
+  }
+
+  editvalueresumeObjectif(e, i){
+    this.commissioninfos.objectif[i].resume = e.srcElement.value
+  }
+
+  deleteObjectif(i){
+    this.commissioninfos.objectifs.splice(i,1)
+  }
   addobjectifsFormGroup(): FormGroup {
     return this.formBuilder.group({
-      titre: ['', Validators.required],
-      resume: ['', Validators.required],
+      titre: [''],
+      resume: [''],
     });
   }
 
@@ -117,10 +158,17 @@ export class CommissionFormComponent implements OnInit {
     this.addoutilsArray.push(this.addoutilsFormGroup());
   }
 
+  editvaluetitreModalite(e, i){
+    this.commissioninfos.modalites[i].titre = e.srcElement.value
+  }
+
+  deleteModalite(i, item){
+    this.commissioninfos.modalites.splice(i,1)
+  }
 
   addmodalitesFormGroup(): FormGroup {
     return this.formBuilder.group({
-      titre: ['', Validators.required],
+      titre: [''],
     });
   }
 
@@ -155,7 +203,6 @@ export class CommissionFormComponent implements OnInit {
   }
 
   onSaveCommission(){
-    alert('bien')
     const titre = this.commissionForm.get('titre').value;
     const introduction = this.commissionForm.get('introduction').value;
     const titreoutil = this.commissionForm.get('titreoutil').value;
@@ -165,6 +212,7 @@ export class CommissionFormComponent implements OnInit {
     const newcommission = new Commission(titre, introduction,titreoutil,resumeoutil, titremodalite, resumemodalite) ;
     this.fileUrl = this.uploadCPT.fileUrl;
     this.fileUrlOutil = this.uploadCPT.fileUrlOutil;
+    this.fichierOutil = this.uploadCPT.fichierOutil;
     if(this.fileUrl && this.fileUrl !== ''){
       newcommission.profile = this.fileUrl;
     }
@@ -173,11 +221,46 @@ export class CommissionFormComponent implements OnInit {
         this.commissionForm.get('outils').value[index].profile = this.fileUrlOutil[index]; 
       }
     }
-    newcommission.modalites = this.commissionForm.get('modalites').value
-    newcommission.objectifs = this.commissionForm.get('objectifs').value
-    newcommission.perspectives = this.commissionForm.get('perspectives').value
-    newcommission.outils = this.commissionForm.get('outils').value
-    this.usagersService.updateUsagersCommission(newcommission)
+     
+    if(this.fichierOutil){
+      for (let index = 0; index < this.fileUrlOutil.length; index++) {
+        this.commissionForm.get('outils').value[index].fichier = this.fichierOutil[index]; 
+      }
+    }
+      if(this.commissionForm.get('objectifs').touched){
+        let id = this.commissioninfos.objectifs.length
+        for (let index = 0; index < this.commissionForm.get('objectifs').value.length; index++) {
+          this.commissioninfos.objectifs[id] = this.commissionForm.get('objectifs').value[index]
+           id = id+1
+        }
+      }
+
+      if(this.commissionForm.get('modalites').touched){
+        let id = this.commissioninfos.modalites.length
+        for (let index = 0; index < this.commissionForm.get('modalites').value.length; index++) {
+          this.commissioninfos.modalites[id] = this.commissionForm.get('modalites').value[index]
+           id = id+1
+        }
+      }
+
+      if(this.commissionForm.get('perspectives').touched){
+        let id = this.commissioninfos.perspectives.length
+        for (let index = 0; index < this.commissionForm.get('perspectives').value.length; index++) {
+          this.commissioninfos.perspectives[id] = this.commissionForm.get('perspectives').value[index]
+           id = id+1
+        }
+      }
+
+      if(this.commissionForm.get('outils').touched){
+        let id = this.commissioninfos.outils.length
+        for (let index = 0; index < this.commissionForm.get('outils').value.length; index++) {
+          this.commissioninfos.outils[id] = this.commissionForm.get('outils').value[index]
+           id = id+1
+        }
+      }
+
+    this.commissionForm.reset()
+    this.usagersService.updateUsagersCommission(this.commissioninfos)
   }
 
 }

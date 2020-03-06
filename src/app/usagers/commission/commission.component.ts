@@ -5,10 +5,10 @@ import { Commission } from 'src/app/models/commission';
 @Component({
   selector: 'app-commission',
   templateUrl: './commission.component.html',
-  styleUrls: ['./commission.component.css']
+  styleUrls: ['../usagers.component.css']
 })
 export class CommissionComponent implements OnInit {
-
+  currentOrientation = 'horizontal';
   commissioninfos;
   constructor(private usagersService: UsagersService) { }
 

@@ -607,7 +607,7 @@
                           <div class="card-body">
                             <ngb-tabset type="pills">
                               <ngb-tab>
-                              <ng-template ngbTabTitle><b>Benefit</b></ng-template>
+                              <ng-template ngbTabTitle><b>Commission</b></ng-template>
                                 <ng-template ngbTabContent>
                                   <app-commission></app-commission>
                                 </ng-template>
@@ -627,10 +627,10 @@
                 <li ngbNavItem>
                   <a class="collapse-item" ngbNavLink>
                     <i class="fa fa-address-book-o" style="color: #3a3b45;" aria-hidden="true"></i>
-                    <span>Organisation</span></a>
+                    <span>Collectif</span></a>
                     <ng-template ngbNavContent>
                       <div class="d-sm-flex align-items-center justify-content-between mb-4">
-                      <h1 class="h3 mb-0 text-gray-800">Administration Empower - Interfaçe Membres de l'équipe</h1>
+                      <h1 class="h3 mb-0 text-gray-800">Administration Empower - Interfaçe Collectif</h1>
                       </div>
                       
                       <div class="row">
@@ -649,49 +649,18 @@
                           <div class="card-body">
                             <ngb-tabset type="pills">
                               <ngb-tab>
-                              <ng-template ngbTabTitle><b>Tout les membres</b></ng-template>
+                              <ng-template ngbTabTitle><b>Collectif</b></ng-template>
                                 <ng-template ngbTabContent>
-                                   <app-organisations></app-organisations>
+                                  <app-collectif></app-collectif>
                                 </ng-template>
                               </ngb-tab>
                               <ngb-tab>
-                                <ng-template ngbTabTitle><b>Enregistrer</b> un nouveau membre</ng-template>
+                                <ng-template ngbTabTitle><b>Update</b> Collectif Usagers</ng-template>
                                 <ng-template ngbTabContent>
-                                  <app-organisation-form></app-organisation-form>
+                                  <app-collectif-form></app-collectif-form>
                                 </ng-template>
                               </ngb-tab>
                             </ngb-tabset>
-                          </div>
-                        </div>
-                      </div>
-                    </ng-template>
-                </li>
-                <li ngbNavItem>
-                  <a class="collapse-item" ngbNavLink>
-                    <i class="fas fa-fw fa-bullseye" style="color: #3a3b45;"></i>
-                    <span>Activités</span></a>
-                    <ng-template ngbNavContent>
-                      <div class="d-sm-flex align-items-center justify-content-between mb-4">
-                      <h1 class="h3 mb-0 text-gray-800">Administration Empower - Interfaçe Activités</h1>
-                      </div>
-                      <div class="row">
-                        <!-- Dropdown Card Example -->
-                        <div class="card shadow mb-4">
-                          <!-- Card Header - Dropdown -->
-                          <div class="card-header py-3 d-flex flex-row align-items-center justify-content-between">
-                            <h6 class="m-0 font-weight-bold text-primary">Configuration du widget Activités</h6>
-                            <div class="dropdown no-arrow">
-                              <a *ngIf="!edit" class="btn" (click)="editerRapport()" role="button">
-                                <i class="fas fa-edit fa-sm fa-fw text-gray-400"></i>
-                              </a>
-                              <a *ngIf="edit" class="btn" role="button">
-                                <i class="fas fa-save fa-sm fa-fw text-gray-400"></i>
-                              </a>
-                            </div>
-                          </div>
-                          <!-- Card Body -->
-                          <div class="card-body">
-                              <app-rapport-form [editRapport]="editRapport"></app-rapport-form>
                           </div>
                         </div>
                       </div>

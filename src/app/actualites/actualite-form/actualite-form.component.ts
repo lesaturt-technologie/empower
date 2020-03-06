@@ -5,12 +5,9 @@ import { Router } from '@angular/router';
 import { Actualite } from 'src/app/models/actualite.model';
 import { CategoriesService } from 'src/app/services/categories.service';
 import { Categorie } from 'src/app/models/categorie';
-import { Subscription, Observable, from } from 'rxjs';
+import { Subscription} from 'rxjs';
 import { UploadComponent } from 'src/app/upload/upload.component';
 import { DatePipe } from '@angular/common';
-import { of } from 'rxjs';
-import { mergeMap, groupBy, reduce, map, toArray } from 'rxjs/operators';
-import { error } from 'util';
 
 @Component({
   selector: 'app-actualite-form',

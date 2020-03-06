@@ -1,1 +1,102 @@
-<p>commission works!</p>
+<section id="content-section" class="content-section">
+    <div class="container">
+        <div class="single-col-max mx-auto">
+            <h2 class="section-heading mb-5 text-center">{{commissioninfos.titre}}</h2>
+            <div class="section-intro single-col-max mx-auto mb-5">
+                {{commissioninfos.introduction}}
+            </div>
+        </div>
+        <div class="row col-sm-12 testimonial-active wow fadeInUpBig" data-wow-duration="1s" data-wow-delay="0.8s">
+            <div class="col-lg-4" *ngFor="let objectif of commissioninfos.objectifs">
+                <div class="single-testimonial">
+                    <div class="testimonial-review d-flex align-items-center justify-content-between">
+                        <div class="quota">
+                            <i class="lni-quotation"></i>
+                        </div>
+                        <div class="star">
+                            <ul>
+                                <li><i class="lni-star-filled"></i></li>
+                                <li><i class="lni-star-filled"></i></li>
+                                <li><i class="lni-star-filled"></i></li>
+                                <li><i class="lni-star-filled"></i></li>
+                                <li><i class="lni-star-filled"></i></li>
+                            </ul>
+                        </div>
+                    </div>
+                    <div class="testimonial-author d-flex align-items-center">
+                        <div class="author-content media-body">
+                            <h6 class="holder-name">{{objectif.titre}}</h6 >
+                        </div>
+                    </div>
+                    <div class="testimonial-text">
+                        <p class="text">{{objectif.resume}}</p>
+                    </div>
+                </div> <!-- single testimonial -->
+            </div>
+        </div> <!-- row -->
+        <div class="single-col-max mx-auto">
+            <div class="row">
+                <div class="col-12 col-md-6">
+                    <div class="figure-holder mb-5">
+                        <img class="img-fluid" [src]="commissioninfos.profile" [alt]="commissioninfos.introduction">
+                    </div><!--//figure-holder-->
+                </div><!--//col-->
+                <div class="col-12 col-md-6 mb-5">
+                    <div class="key-points mb-4">
+                        <ul class="key-points-list list-unstyled mb-4 mx-auto d-inline-block text-left">
+                            <div class="media-body">
+                                <h2 style="font-size: 1.5rem;" class="item-title">{{commissioninfos.titremodalite}}</h2>
+                                <div class="item-desc">{{commissioninfos.resumemodalite}}</div>
+                            </div><br>
+                            <li *ngFor="let modalite of commissioninfos.modalites"><svg style="height: 1em;" class="svg-inline--fa fa-check-circle fa-w-16 mr-2" aria-hidden="true" focusable="false" data-prefix="fas" data-icon="check-circle" role="img" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 512 512" data-fa-i2svg=""><path fill="currentColor" d="M504 256c0 136.967-111.033 248-248 248S8 392.967 8 256 119.033 8 256 8s248 111.033 248 248zM227.314 387.314l184-184c6.248-6.248 6.248-16.379 0-22.627l-22.627-22.627c-6.248-6.249-16.379-6.249-22.628 0L216 308.118l-70.059-70.059c-6.248-6.248-16.379-6.248-22.628 0l-22.627 22.627c-6.248 6.248-6.248 16.379 0 22.627l104 104c6.249 6.249 16.379 6.249 22.628.001z"></path></svg><!-- <i class="fas fa-check-circle mr-2"></i> --> {{modalite.titre}}</li>
+                        </ul>
+                    </div><!--//key-points-->
+                </div><!--//col-12-->  
+            </div><!--//row-->
+            <style>
+                #nav-lk{
+                    background-color: #ed6524;
+                    color: white;
+                    text-align: center;
+                    font-weight: 700;
+                }
+
+                #nav-lk:active{
+                    background-color: white;
+                    color: #ed6524;
+                    text-align: center;
+                    font-weight: 700;
+                }
+            </style>
+            <ngb-tabset #t="ngbTabset">
+                <ngb-tab *ngFor="let outil of commissioninfos.outils | groupBy:'groupe' | pairs; let i = index" id="nav-lk tab-selectbyid{{i}}" >
+                  <ng-template ngbTabTitle><b style="text-align: center;     font-size: medium;
+                    font-weight: 900;
+                    text-size-adjust: auto;
+                    text-align-last: right;
+                    text-transform: capitalize;
+                    padding-top: inherit;" >{{outil[0]}}</b></ng-template>
+                  <ng-template ngbTabContent>
+                    <div class="row justify-content-center">
+                        <div class="col-lg-4 col-md-7" *ngFor="let group of outil[1]; let g = index">
+                            <div class="single-blog mt-30 wow fadeIn" data-wow-duration="1s" data-wow-delay="0.2s" style="visibility: visible; animation-duration: 1s; animation-delay: 0.2s; animation-name: fadeIn;">
+                                <div class="blog-image">
+                                    <img [src]="group.profile" class="card-img-top" [alt]="group.resume">
+                                </div>
+                                <div class="blog-content">
+                                    <ul class="meta">
+                                        <li><a [href]="group.fichier" target="_blank">Accéder au fichier: <i class="fa fa-file-pdf"></i></a></li>
+                                    </ul>
+                                    <h5 class="card-title">{{group.titre}}</h5>
+                                    <p class="card-text">{{group.resume}}</p>
+                                    <a class="more" href="#">Learn More <i class="lni-chevron-right"></i></a>
+                                </div>
+                            </div> <!-- single blog -->
+                        </div> 
+                    </div>
+                  </ng-template>
+                </ngb-tab>
+              </ngb-tabset>
+        </div><!--//single-col-max-->
+    </div><!--//container-->
+</section>

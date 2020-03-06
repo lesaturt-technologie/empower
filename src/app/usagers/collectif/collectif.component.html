@@ -1,0 +1,27 @@
+<section id="reviews-section" class="reviews-section py-5">
+    <div class="container">
+        <h2 class="section-heading text-center">{{collectifinfos.titre}}</h2>
+        <div class="section-intro text-center single-col-max mx-auto mb-5">{{collectifinfos.introduction}}</div>
+        <div class="row justify-content-center">
+            <div class="item col-12 col-lg-4 p-3 mb-4" *ngFor="let collectif of collectifinfos.paragraphe; let i = index">
+                <div class="item-inner theme-bg-light rounded p-4">
+                    
+                    <blockquote class="quote">
+                            {{collectif.resume}}
+                    </blockquote><!--//item-->
+                    <div class="source media flex-column flex-md-row align-items-center">
+                        <img class="source-profile mr-md-3" [src]="collectif.profile" [alt]="collectif.resume">
+                        <div class="source-info media-body text-center text-md-left">
+                            <div class="source-name">{{collectif.titre}}</div>
+                            <div class="soure-title">{{collectif.soustitre}}</div>
+                        </div>
+                    </div><!--//source-->
+                    <div class="icon-holder"><svg class="svg-inline--fa fa-quote-right fa-w-16" aria-hidden="true" focusable="false" data-prefix="fas" data-icon="quote-right" role="img" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 512 512" data-fa-i2svg=""><path fill="currentColor" d="M464 32H336c-26.5 0-48 21.5-48 48v128c0 26.5 21.5 48 48 48h80v64c0 35.3-28.7 64-64 64h-8c-13.3 0-24 10.7-24 24v48c0 13.3 10.7 24 24 24h8c88.4 0 160-71.6 160-160V80c0-26.5-21.5-48-48-48zm-288 0H48C21.5 32 0 53.5 0 80v128c0 26.5 21.5 48 48 48h80v64c0 35.3-28.7 64-64 64h-8c-13.3 0-24 10.7-24 24v48c0 13.3 10.7 24 24 24h8c88.4 0 160-71.6 160-160V80c0-26.5-21.5-48-48-48z"></path></svg><!-- <i class="fas fa-quote-right"></i> --></div>
+                </div><!--//inner-->
+            </div><!--//item-->
+        </div><!--//row-->
+        <div class="text-center">
+            <a class="btn btn-primary" href="https://themes.3rdwavemedia.com/bootstrap-templates/startup/devbook-free-bootstrap-4-book-ebook-landing-page-template-for-developers/">Get Your Copy Today</a>
+        </div>
+    </div><!--//container-->
+</section>
