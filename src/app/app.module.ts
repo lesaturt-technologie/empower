@@ -70,7 +70,11 @@ import { CollectifComponent } from './usagers/collectif/collectif.component';
 import { CollectifFormComponent } from './usagers/collectif-form/collectif-form.component';
 
 const appRoutes: Routes = [
-  { path: "", component: HomeComponent},
+  { path: "accueil", component: HomeComponent},
+  { path: '',
+    redirectTo: '/accueil',
+    pathMatch: 'full'
+  },
   { path: "auth/signup", component: SignupComponent},
   { path: "auth/signin", component: SigninComponent},
   { path: "admin/actualites", canActivate: [AuthGuardService], component: AdminComponent},
@@ -164,7 +168,8 @@ const appRoutes: Routes = [
     NgbModule,
     NgPipesModule,
     RouterModule.forRoot(appRoutes,{
-      anchorScrolling: 'enabled'
+      anchorScrolling: 'enabled',
+      enableTracing: true
     })
   ],
   providers: [
